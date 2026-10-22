@@ -2,6 +2,10 @@
 
 > A smart-city decision-support platform for cascading-failure simulation, historical flood replay, GIS visualization, and resilient emergency routing.
 
+**For:** smart-city researchers, urban planners, and hackathon evaluators exploring *simulated* infrastructure dependencies.  
+**Engineering focus:** FastAPI services, NetworkX cascading-failure analysis, React/Cytoscape visualization, and Leaflet GIS views.  
+**Source:** [GitHub repository](https://github.com/rajsalonia/citygraph) · **Hosted deployment:** [CityGraph](https://citygraph-intelligence.vercel.app/) (availability not independently verified; the prototype is not an emergency tool).
+
 [![FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688.svg?style=flat&logo=fastapi)](https://fastapi.tiangolo.com/)
 [![React](https://img.shields.io/badge/Frontend-React%2019-61DAFB.svg?style=flat&logo=react)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Bundler-Vite%208-646CFF.svg?style=flat&logo=vite)](https://vitejs.dev/)
@@ -201,3 +205,31 @@ flowchart TD
     GraphAPI --> Cytoscape
     HistoricalAPI --> Leaflet
     NepalAPI --> SVG
+
+
+## Run locally
+
+These commands follow the checked-in `backend/requirements.txt`, `backend/main.py`, and `frontend/package.json`.
+
+```bash
+git clone https://github.com/rajsalonia/citygraph.git
+cd citygraph
+python -m venv .venv
+# Activate .venv (Windows: .venv\\Scripts\\Activate.ps1; macOS/Linux: source .venv/bin/activate)
+python -m pip install -r backend/requirements.txt
+cd backend
+python -m uvicorn main:app --reload --host 127.0.0.1 --port 8000
+```
+
+In a **second terminal** from the repository root:
+
+```bash
+cd frontend
+npm install
+npm run dev
+# For a production asset build: npm run build
+```
+
+The FastAPI API docs are at `http://localhost:8000/docs` when `ENABLE_DOCS=true`. API and frontend start separately; configure their connectivity for your local environment. Authentication defaults are for demonstration only: replace secrets and review CORS before hosting on a public network.
+
+**Verification scope:** The commands above are based on inspected manifests and imports, not a completed local installation or test run. `npm run build` is available; an automated backend test suite has not been independently verified in this audit. Flood and evacuation scenarios are illustrative, not real-time operational guidance.
