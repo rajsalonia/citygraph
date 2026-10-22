@@ -205,7 +205,7 @@ flowchart TD
     GraphAPI --> Cytoscape
     HistoricalAPI --> Leaflet
     NepalAPI --> SVG
-
+```
 
 ## Run locally
 
